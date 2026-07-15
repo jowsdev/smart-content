@@ -1,5 +1,4 @@
 import React from 'react';
-import { colors } from '../../../styles/colors';
 import { spacing } from '../../../styles/spacing';
 
 export const MCPExecutionLogs: React.FC = () => {

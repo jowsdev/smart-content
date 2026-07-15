@@ -1,5 +1,5 @@
 export const srtParser = {
-  parse: (content: string) => {
+  parse: (_content: string) => {
     console.log('SRT Parser: Parsing content');
     return [];
   }

@@ -1,4 +1,4 @@
-import { Composition } from '../../video/types/composition.types';
+import type { Composition } from '../../../shared/domain/composition.types';
 import { CompositionMapper } from '../engine/CompositionMapper';
 
 export class CompositionAdapter {

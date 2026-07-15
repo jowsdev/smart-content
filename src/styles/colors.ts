@@ -36,14 +36,21 @@ export const colors = {
     contrastText: '#ffffff',
   },
   background: {
+    main: '#242424',
     default: '#242424',
     paper: '#1a1a1a',
     surface: '#2c2c2c',
+    light: '#333333',
   },
   text: {
     primary: 'rgba(255, 255, 255, 0.87)',
     secondary: 'rgba(255, 255, 255, 0.6)',
     disabled: 'rgba(255, 255, 255, 0.38)',
+    muted: 'rgba(255, 255, 255, 0.5)',
   },
   divider: 'rgba(255, 255, 255, 0.12)',
+  border: {
+    main: 'rgba(255, 255, 255, 0.12)',
+    light: 'rgba(255, 255, 255, 0.08)',
+  },
 };

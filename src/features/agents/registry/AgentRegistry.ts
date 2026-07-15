@@ -34,8 +34,16 @@ export class AgentRegistry {
     return this.agents.get(id);
   }
 
+  public getAgent(id: string): Agent | undefined {
+    return this.find(id);
+  }
+
   public getAll(): Agent[] {
     return Array.from(this.agents.values());
+  }
+
+  public getAllAgents(): Agent[] {
+    return this.getAll();
   }
 
   public findByCategory(category: AgentCategory): Agent[] {

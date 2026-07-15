@@ -1,5 +1,10 @@
 export interface AIRequest {
-  prompt: string;
+  id?: string;
+  prompt?: string;
+  providerId?: string;
+  modelId?: string;
+  messages?: any[];
+  metadata?: Record<string, any>;
   systemPrompt?: string;
   model?: string;
   temperature?: number;

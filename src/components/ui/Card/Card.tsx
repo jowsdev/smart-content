@@ -7,10 +7,11 @@ interface CardProps {
   footer?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  padding?: keyof typeof theme.spacing | string | number;
   onClick?: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ children, header, footer, className, style, onClick }) => {
+const Card: React.FC<CardProps> = ({ children, header, footer, className, style, padding = 'md', onClick }) => {
   const cardStyle: React.CSSProperties = {
     backgroundColor: theme.colors.background.paper,
     borderRadius: theme.radius.lg,
@@ -20,8 +21,12 @@ const Card: React.FC<CardProps> = ({ children, header, footer, className, style,
     ...style,
   };
 
+  const resolvedPadding = typeof padding === 'string' && padding in theme.spacing
+    ? theme.spacing[padding as keyof typeof theme.spacing]
+    : padding;
+
   const sectionStyle: React.CSSProperties = {
-    padding: theme.spacing.md,
+    padding: resolvedPadding,
   };
 
   const headerStyle: React.CSSProperties = {

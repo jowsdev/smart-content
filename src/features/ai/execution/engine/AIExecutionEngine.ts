@@ -18,8 +18,11 @@ export class AIExecutionEngine {
     // Mock implementation for the shell
     console.log('Executing AI request:', request);
     return {
-      content: `Response to: ${request.prompt}`,
-      model: request.model || 'smart-content-v1',
+      id: request.id,
+      content: `Response to: ${request.prompt ?? request.messages?.at(-1)?.content ?? ''}`,
+      model: request.model || request.modelId || 'smart-content-v1',
+      provider: request.providerId,
+      createdAt: new Date().toISOString(),
       usage: {
         promptTokens: 10,
         completionTokens: 20,
@@ -28,8 +31,12 @@ export class AIExecutionEngine {
     };
   }
 
+  public stream(request: AIRequest, _handlers?: any) {
+    return this.executeStream(request);
+  }
+
   public async *executeStream(request: AIRequest): AsyncGenerator<StreamingChunk> {
-    const response = `This is a streamed response to: ${request.prompt}`;
+    const response = `This is a streamed response to: ${request.prompt ?? request.messages?.at(-1)?.content ?? ''}`;
     const words = response.split(' ');
 
     for (const word of words) {

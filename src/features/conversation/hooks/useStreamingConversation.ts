@@ -44,7 +44,7 @@ export function useStreamingConversation(conversation: Conversation | null) {
         },
         onError: () => setIsStreaming(false)
       });
-    } catch (err) {
+    } catch {
       setIsStreaming(false);
     }
   }, [conversation, streamedContent]);

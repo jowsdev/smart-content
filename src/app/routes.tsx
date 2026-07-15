@@ -3,7 +3,6 @@ import AppLayout from './AppLayout';
 import DashboardPage from '../features/dashboard/DashboardPage';
 import ComingSoonPage from '../features/dashboard/ComingSoonPage';
 import { AgentsPage } from '../features/agents';
-import { KnowledgePage } from '../features/knowledge';
 import { ProfilesPage, ProfileDetailsPage } from '../features/profiles';
 import { ChatPage } from '../features/conversation';
 import { MCPPage } from '../features/mcp';
