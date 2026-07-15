@@ -26,8 +26,16 @@ export class KnowledgeRegistry {
     return this.items.get(id);
   }
 
+  public getCollection(id: string): KnowledgeItem | undefined {
+    return this.find(id);
+  }
+
   public getAll(): KnowledgeItem[] {
     return Array.from(this.items.values());
+  }
+
+  public getAllCollections(): KnowledgeItem[] {
+    return this.getAll();
   }
 
   public findByCollection(collectionId: string): KnowledgeItem[] {

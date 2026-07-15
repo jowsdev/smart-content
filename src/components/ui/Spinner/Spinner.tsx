@@ -2,7 +2,7 @@ import React from 'react';
 import { theme } from '../../../styles/theme';
 
 export interface SpinnerProps {
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large';
   color?: string;
   className?: string;
   style?: React.CSSProperties;
@@ -12,6 +12,8 @@ export interface SpinnerProps {
  * Spinner component for loading states
  */
 const Spinner: React.FC<SpinnerProps> = ({ size = 'md', color, className, style }) => {
+  const normalizedSize = size === 'small' ? 'sm' : size === 'medium' ? 'md' : size === 'large' ? 'lg' : size;
+
   const sizes = {
     sm: '16px',
     md: '32px',
@@ -19,8 +21,8 @@ const Spinner: React.FC<SpinnerProps> = ({ size = 'md', color, className, style 
   };
 
   const spinnerStyle: React.CSSProperties = {
-    width: sizes[size],
-    height: sizes[size],
+    width: sizes[normalizedSize],
+    height: sizes[normalizedSize],
     border: `3px solid ${theme.colors.divider}`,
     borderTop: `3px solid ${color || theme.colors.primary.main}`,
     borderRadius: '50%',

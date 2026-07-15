@@ -5,7 +5,7 @@ export interface AvatarProps {
   src?: string;
   alt?: string;
   name?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large';
   className?: string;
   style?: React.CSSProperties;
 }
@@ -23,6 +23,8 @@ const Avatar: React.FC<AvatarProps> = ({ src, alt, name, size = 'md', className,
       .substring(0, 2);
   };
 
+  const normalizedSize = size === 'small' ? 'sm' : size === 'medium' ? 'md' : size === 'large' ? 'lg' : size;
+
   const sizes = {
     sm: '24px',
     md: '40px',
@@ -30,15 +32,15 @@ const Avatar: React.FC<AvatarProps> = ({ src, alt, name, size = 'md', className,
   };
 
   const avatarStyle: React.CSSProperties = {
-    width: sizes[size],
-    height: sizes[size],
+    width: sizes[normalizedSize],
+    height: sizes[normalizedSize],
     borderRadius: theme.radius.full,
     backgroundColor: theme.colors.secondary.main,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
-    fontSize: size === 'sm' ? theme.typography.fontSize.xs : theme.typography.fontSize.lg,
+    fontSize: normalizedSize === 'sm' ? theme.typography.fontSize.xs : theme.typography.fontSize.lg,
     fontWeight: theme.typography.fontWeight.bold,
     color: theme.colors.secondary.contrastText,
     ...style,
