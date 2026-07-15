@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+*.log
+.DS_Store
+all_files.txt
+ai_structure.txt
+build_output.txt
+dev_server.log
+features.txt
+features_list.txt
+ai_files.txt
+conversation_services.txt
