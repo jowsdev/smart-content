@@ -11,12 +11,13 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   helperText?: string;
   error?: boolean;
+  placeholder?: string;
 }
 
 /**
  * Standard dropdown selection component
  */
-const Select: React.FC<SelectProps> = ({ options, label, helperText, error, style, id, ...props }) => {
+const Select: React.FC<SelectProps> = ({ options, label, helperText, error, style, id, placeholder, ...props }) => {
   const generatedId = useId();
   const selectId = id || generatedId;
 
@@ -54,6 +55,7 @@ const Select: React.FC<SelectProps> = ({ options, label, helperText, error, styl
     <div style={containerStyle}>
       {label && <label htmlFor={selectId} style={labelStyle}>{label}</label>}
       <select id={selectId} style={selectStyle} {...props}>
+        {placeholder && <option value="" disabled>{placeholder}</option>}
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

@@ -8,7 +8,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'dan
 /**
  * Sizes for the Button component
  */
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -39,6 +39,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
    * @default false
    */
   isLoading?: boolean;
+
+  /**
+   * Backward-compatible shorthand for variant="danger".
+   */
+  danger?: boolean;
 
   /**
    * Optional icon to show before the text
