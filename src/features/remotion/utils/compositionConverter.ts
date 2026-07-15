@@ -1,4 +1,4 @@
-import { Composition } from '../../video/types/composition.types';
+import type { Composition } from '../../../shared/domain/composition.types';
 
 export const compositionConverter = {
   toRemotionSchema: (composition: Composition) => {

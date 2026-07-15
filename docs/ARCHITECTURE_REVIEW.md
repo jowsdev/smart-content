@@ -12,10 +12,10 @@ The codebase uses a consistent feature-first layout and has a useful vocabulary 
 
 | Area | Score |
 | --- | ---: |
-| Architecture | 62 / 100 |
-| Maintainability | 58 / 100 |
-| Scalability | 55 / 100 |
-| React Best Practices | 60 / 100 |
+| Architecture | 70 / 100 |
+| Maintainability | 64 / 100 |
+| Scalability | 62 / 100 |
+| React Best Practices | 61 / 100 |
 
 ## Findings
 
@@ -88,14 +88,17 @@ The codebase uses a consistent feature-first layout and has a useful vocabulary 
 - Restored strict unused local/parameter checks while keeping the previous build-compatible module syntax setting.
 - Removed or prefixed currently unused locals, imports, and placeholder parameters.
 - Preserved the public component and feature APIs introduced in the previous commit.
+- Removed detected relative cross-feature imports under `src/features`.
+- Introduced a profile composition port/facade so profile UI no longer imports external feature registries.
+- Moved composition contracts into `src/shared/domain` and preserved the existing video type import path with a re-export.
 - Added this review as a durable architecture baseline for follow-up work.
 
 ## Technical Debt Report
 
 | Debt Item | Severity | Remediation |
 | --- | --- | --- |
-| Cross-feature concrete imports | Critical | Define feature public APIs and enforce dependency rules. |
-| Profile editor orchestration in UI | Critical | Extract facade/hook and split sections. |
+| Cross-feature concrete imports | Mitigated | Feature-to-feature relative imports were removed; add CI enforcement to prevent regression. |
+| Profile editor orchestration in UI | High | Facade port introduced; split UI sections and wire real adapters next. |
 | Duplicated composition/render concepts | High | Establish owned shared contracts and adapter mappings. |
 | Singleton mutable registries | High | Introduce injectable registry interfaces/providers. |
 | Placeholder services/engines | High | Define service vs engine responsibilities and replace stubs incrementally. |

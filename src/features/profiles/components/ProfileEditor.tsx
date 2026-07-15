@@ -7,12 +7,8 @@ import { Badge } from '../../../components/ui/Badge';
 import { Select } from '../../../components/ui/Select';
 import { spacing } from '../../../styles/spacing';
 import { colors } from '../../../styles/colors';
-import { agentRegistry } from '../../agents/registry/AgentRegistry';
-import { workflowRegistry } from '../../workflows/registry/WorkflowRegistry';
-import { promptRegistry } from '../../prompts/registry/PromptRegistry';
-import { providerRegistry } from '../../providers/registry/ProviderRegistry';
-import { knowledgeRegistry } from '../../knowledge/registry/KnowledgeRegistry';
-import { contentRegistry } from '../../content/registry/ContentRegistry';
+import type { ProfileCompositionFacade } from '../ports/profileComposition.types';
+import { defaultProfileCompositionFacade } from '../facades/profileComposition.facade';
 
 // Internal Components for sections
 const GeneralSection: React.FC<{ profile: Profile }> = ({ profile }) => (
@@ -38,15 +34,15 @@ const GeneralSection: React.FC<{ profile: Profile }> = ({ profile }) => (
   </div>
 );
 
-const AgentsSection: React.FC<{ profile: Profile }> = ({ profile }) => {
-  const allAgents = agentRegistry.getAllAgents();
+const AgentsSection: React.FC<{ profile: Profile; facade: ProfileCompositionFacade }> = ({ profile, facade }) => {
+  const { agents } = facade.getComposition();
   return (
     <div>
       <h3>Assigned Agents</h3>
       <p style={{ color: colors.text.secondary, marginBottom: spacing.md }}>Select agents that will be available in this profile.</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: spacing.sm }}>
         {profile.agentIds.map(id => {
-          const agent = agentRegistry.getAgent(id);
+          const agent = facade.findAgent(id);
           return (
             <Badge key={id} variant="primary">
               {agent?.name || id} <span style={{ cursor: 'pointer', marginLeft: 4 }}>×</span>
@@ -54,7 +50,7 @@ const AgentsSection: React.FC<{ profile: Profile }> = ({ profile }) => {
           );
         })}
         <Select
-          options={allAgents.map(a => ({ label: a.name, value: a.id }))}
+          options={agents.map(a => ({ label: a.name, value: a.id }))}
           placeholder="Add Agent..."
           onChange={() => {}}
           style={{ width: 200 }}
@@ -64,15 +60,15 @@ const AgentsSection: React.FC<{ profile: Profile }> = ({ profile }) => {
   );
 };
 
-const WorkflowsSection: React.FC<{ profile: Profile }> = ({ profile }) => {
-  const allWorkflows = workflowRegistry.getAllWorkflows();
+const WorkflowsSection: React.FC<{ profile: Profile; facade: ProfileCompositionFacade }> = ({ profile, facade }) => {
+  const { workflows } = facade.getComposition();
   return (
     <div>
       <h3>Workflows</h3>
       <p style={{ color: colors.text.secondary, marginBottom: spacing.md }}>Automated sequences of tasks for this profile.</p>
       <div style={{ display: 'grid', gap: spacing.sm }}>
         {profile.workflowIds.map(id => {
-          const wf = workflowRegistry.getWorkflow(id);
+          const wf = facade.findWorkflow(id);
           return (
             <Card key={id} padding="small" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span>{wf?.name || id}</span>
@@ -81,7 +77,7 @@ const WorkflowsSection: React.FC<{ profile: Profile }> = ({ profile }) => {
           );
         })}
         <Select
-          options={allWorkflows.map(w => ({ label: w.name, value: w.id }))}
+          options={workflows.map(w => ({ label: w.name, value: w.id }))}
           placeholder="Add Workflow..."
           onChange={() => {}}
         />
@@ -90,15 +86,15 @@ const WorkflowsSection: React.FC<{ profile: Profile }> = ({ profile }) => {
   );
 };
 
-const PromptsSection: React.FC<{ profile: Profile }> = ({ profile }) => {
-  const allPrompts = promptRegistry.getAllPrompts();
+const PromptsSection: React.FC<{ profile: Profile; facade: ProfileCompositionFacade }> = ({ profile, facade }) => {
+  const { prompts } = facade.getComposition();
   return (
     <div>
       <h3>Prompts</h3>
       <p style={{ color: colors.text.secondary, marginBottom: spacing.md }}>Pre-configured prompt templates for this profile.</p>
       <div style={{ display: 'grid', gap: spacing.sm }}>
         {profile.promptIds.map(id => {
-          const prompt = promptRegistry.getPrompt(id);
+          const prompt = facade.findPrompt(id);
           return (
             <Card key={id} padding="small" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
@@ -110,7 +106,7 @@ const PromptsSection: React.FC<{ profile: Profile }> = ({ profile }) => {
           );
         })}
         <Select
-          options={allPrompts.map(p => ({ label: p.name, value: p.id }))}
+          options={prompts.map(p => ({ label: p.name, value: p.id }))}
           placeholder="Add Prompt Template..."
           onChange={() => {}}
         />
@@ -119,15 +115,15 @@ const PromptsSection: React.FC<{ profile: Profile }> = ({ profile }) => {
   );
 };
 
-const KnowledgeSection: React.FC<{ profile: Profile }> = ({ profile }) => {
-  const allCollections = knowledgeRegistry.getAllCollections();
+const KnowledgeSection: React.FC<{ profile: Profile; facade: ProfileCompositionFacade }> = ({ profile, facade }) => {
+  const { knowledgeCollections } = facade.getComposition();
   return (
     <div>
       <h3>Knowledge Collections</h3>
       <p style={{ color: colors.text.secondary, marginBottom: spacing.md }}>Connect datasets and documentation to this profile.</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: spacing.sm }}>
         {profile.knowledgeCollectionIds.map(id => {
-          const col = knowledgeRegistry.getCollection(id);
+          const col = facade.findKnowledgeCollection(id);
           return (
             <Badge key={id} variant="secondary">
               {col?.name || id} <span style={{ cursor: 'pointer', marginLeft: 4 }}>×</span>
@@ -135,7 +131,7 @@ const KnowledgeSection: React.FC<{ profile: Profile }> = ({ profile }) => {
           );
         })}
         <Select
-          options={allCollections.map(c => ({ label: c.name, value: c.id }))}
+          options={knowledgeCollections.map(c => ({ label: c.name, value: c.id }))}
           placeholder="Add Collection..."
           onChange={() => {}}
           style={{ width: 200 }}
@@ -145,9 +141,9 @@ const KnowledgeSection: React.FC<{ profile: Profile }> = ({ profile }) => {
   );
 };
 
-const ProvidersSection: React.FC<{ profile: Profile }> = ({ profile }) => {
-  const allProviders = providerRegistry.getAllProviders();
-  const selectedProvider = providerRegistry.getProvider(profile.settings.preferredProviderId || '');
+const ProvidersSection: React.FC<{ profile: Profile; facade: ProfileCompositionFacade }> = ({ profile, facade }) => {
+  const { providers } = facade.getComposition();
+  const selectedProvider = facade.findProvider(profile.settings.preferredProviderId || '');
 
   return (
     <div>
@@ -156,7 +152,7 @@ const ProvidersSection: React.FC<{ profile: Profile }> = ({ profile }) => {
         <div>
           <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: spacing.xs }}>Preferred Provider</label>
           <Select
-            options={allProviders.map(p => ({ label: p.name, value: p.id }))}
+            options={providers.map(p => ({ label: p.name, value: p.id }))}
             value={profile.settings.preferredProviderId}
             onChange={() => {}}
           />
@@ -226,35 +222,37 @@ interface ProfileEditorProps {
   profile: Profile;
   onSave: (profile: Profile) => void;
   onCancel: () => void;
+  compositionFacade?: ProfileCompositionFacade;
 }
 
 export const ProfileEditor: React.FC<ProfileEditorProps> = ({
   profile,
   onSave,
-  onCancel
+  onCancel,
+  compositionFacade = defaultProfileCompositionFacade
 }) => {
   const [activeSection, setActiveSection] = useState('general');
 
   const renderSection = () => {
     switch (activeSection) {
       case 'general': return <GeneralSection profile={profile} />;
-      case 'agents': return <AgentsSection profile={profile} />;
-      case 'workflows': return <WorkflowsSection profile={profile} />;
-      case 'prompts': return <PromptsSection profile={profile} />;
-      case 'knowledge': return <KnowledgeSection profile={profile} />;
-      case 'providers': return <ProvidersSection profile={profile} />;
+      case 'agents': return <AgentsSection profile={profile} facade={compositionFacade} />;
+      case 'workflows': return <WorkflowsSection profile={profile} facade={compositionFacade} />;
+      case 'prompts': return <PromptsSection profile={profile} facade={compositionFacade} />;
+      case 'knowledge': return <KnowledgeSection profile={profile} facade={compositionFacade} />;
+      case 'providers': return <ProvidersSection profile={profile} facade={compositionFacade} />;
       case 'variables': return <VariablesSection profile={profile} />;
       case 'settings': return <SettingsSection profile={profile} />;
       case 'templates': {
-        const allTemplates = contentRegistry.getAllTemplates();
+        const { templates } = compositionFacade.getComposition();
         return (
           <div>
             <h3>Templates</h3>
             <div style={{ display: 'grid', gap: spacing.sm }}>
               {profile.templateIds.map(id => (
-                <Card key={id} padding="small">{contentRegistry.getTemplate(id)?.name || id}</Card>
+                <Card key={id} padding="small">{compositionFacade.findTemplate(id)?.name || id}</Card>
               ))}
-              <Select options={allTemplates.map(t => ({ label: t.name, value: t.id }))} placeholder="Add Template..." onChange={() => {}} />
+              <Select options={templates.map(t => ({ label: t.name, value: t.id }))} placeholder="Add Template..." onChange={() => {}} />
             </div>
           </div>
         );
