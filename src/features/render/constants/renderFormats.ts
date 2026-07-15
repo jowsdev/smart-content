@@ -1,4 +1,4 @@
-import type { ExportFormat, Resolution } from '../types/export.types';
+import type { ExportFormat } from '../types/export.types';
 import type { Resolution as JobResolution } from '../types/renderJob.types';
 
 export const EXPORT_FORMATS: ExportFormat[] = [

@@ -11,7 +11,7 @@ export class CloudRenderer implements BaseRenderer {
     };
   }
 
-  public async validate(job: RenderJob): Promise<{ valid: boolean; errors?: string[] }> {
+  public async validate(_job: RenderJob): Promise<{ valid: boolean; errors?: string[] }> {
     return { valid: true };
   }
 
@@ -29,7 +29,7 @@ export class CloudRenderer implements BaseRenderer {
     console.log(`Canceled cloud render: ${jobId}`);
   }
 
-  public async estimate(job: RenderJob): Promise<number> {
+  public async estimate(_job: RenderJob): Promise<number> {
     return 15000; // 15 seconds
   }
 }

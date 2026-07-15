@@ -1,5 +1,5 @@
 export class ExportEngine {
-  public exportAsSrt(captions: any[]) {
+  public exportAsSrt(_captions: any[]) {
     console.log('Export Engine: Generating SRT string');
     return '';
   }

@@ -3,7 +3,6 @@ import type { Conversation } from '../types/conversation.types';
 import { Card } from '../../../components/ui/Card';
 import { Select } from '../../../components/ui/Select';
 import { spacing } from '../../../styles/spacing';
-import { colors } from '../../../styles/colors';
 
 interface ConversationSettingsProps {
   conversation: Conversation;
@@ -12,7 +11,7 @@ interface ConversationSettingsProps {
 
 export const ConversationSettings: React.FC<ConversationSettingsProps> = ({
   conversation,
-  onUpdate
+  onUpdate: _onUpdate
 }) => {
   return (
     <Card padding="medium">

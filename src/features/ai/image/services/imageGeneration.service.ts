@@ -7,12 +7,12 @@ export const imageGenerationService = {
     return [];
   },
 
-  editImage: async (id: string, updates: any): Promise<GeneratedImage> => {
+  editImage: async (id: string, _updates: any): Promise<GeneratedImage> => {
     console.log('Image Service: Editing', id);
     return {} as GeneratedImage;
   },
 
-  estimate: async (request: ImageRequest): Promise<number> => {
+  estimate: async (_request: ImageRequest): Promise<number> => {
     return 0.05;
   }
 };

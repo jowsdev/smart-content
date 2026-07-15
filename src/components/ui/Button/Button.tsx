@@ -14,6 +14,7 @@ const Button: React.FC<ButtonProps> = ({
   size = 'md',
   fullWidth = false,
   isLoading = false,
+  danger = false,
   startIcon,
   endIcon,
   className,
@@ -22,6 +23,8 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const isDisabled = disabled || isLoading;
+  const normalizedSize = size === 'small' ? 'sm' : size === 'medium' ? 'md' : size === 'large' ? 'lg' : size;
+  const normalizedVariant = danger ? 'danger' : variant;
 
   // Simplified style mapping using theme tokens
   const baseStyles: React.CSSProperties = {
@@ -72,8 +75,8 @@ const Button: React.FC<ButtonProps> = ({
 
   const combinedStyles = {
     ...baseStyles,
-    ...sizeStyles[size],
-    ...variantStyles[variant],
+    ...sizeStyles[normalizedSize],
+    ...variantStyles[normalizedVariant],
   };
 
   return (
@@ -86,7 +89,7 @@ const Button: React.FC<ButtonProps> = ({
       {isLoading && (
         <Spinner
           size="sm"
-          color={variant === 'outline' || variant === 'ghost' ? theme.colors.primary.main : 'white'}
+          color={normalizedVariant === 'outline' || normalizedVariant === 'ghost' ? theme.colors.primary.main : 'white'}
           style={{ marginRight: theme.spacing.xs }}
         />
       )}

@@ -11,7 +11,7 @@ export class LocalRenderer implements BaseRenderer {
     };
   }
 
-  public async validate(job: RenderJob): Promise<{ valid: boolean; errors?: string[] }> {
+  public async validate(_job: RenderJob): Promise<{ valid: boolean; errors?: string[] }> {
     return { valid: true };
   }
 
@@ -28,7 +28,7 @@ export class LocalRenderer implements BaseRenderer {
     console.log(`Canceled local render: ${jobId}`);
   }
 
-  public async estimate(job: RenderJob): Promise<number> {
+  public async estimate(_job: RenderJob): Promise<number> {
     return 30000; // 30 seconds
   }
 }

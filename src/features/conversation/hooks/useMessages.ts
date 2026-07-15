@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
 import { messageService } from '../services/message.service';
 import type { Conversation } from '../types/conversation.types';
-import type { Message } from '../types/message.types';
 
 export function useMessages(conversation: Conversation | null) {
   const [isSending, setIsSending] = useState(false);

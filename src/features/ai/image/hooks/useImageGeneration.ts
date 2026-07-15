@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react';
 import { ImageRequest } from '../types/generation.types';
-import { GeneratedImage } from '../types/image.types';
 
 export const useImageGeneration = () => {
   const [isGenerating, setIsGenerating] = useState(false);

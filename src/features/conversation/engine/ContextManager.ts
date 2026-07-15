@@ -1,4 +1,3 @@
-import type { Message } from '../types/message.types';
 import type { Conversation } from '../types/conversation.types';
 
 export class ContextManager {
