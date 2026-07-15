@@ -1,6 +1,5 @@
 import React from 'react';
 import { colors } from '../../../styles/colors';
-import { spacing } from '../../../styles/spacing';
 
 interface MCPLayoutProps {
   sidebar: React.ReactNode;

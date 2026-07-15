@@ -18,7 +18,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
   profile,
   onOpen,
   onDuplicate,
-  onExport,
+  onExport: _onExport,
   onDelete
 }) => {
   return (

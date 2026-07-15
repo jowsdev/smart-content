@@ -1,7 +1,7 @@
 import { Caption } from '../types/caption.types';
 
 export const captionService = {
-  createCaptions: async (text: string): Promise<Caption[]> => {
+  createCaptions: async (_text: string): Promise<Caption[]> => {
     console.log('Caption Service: Generating from text');
     return [];
   },
@@ -11,7 +11,7 @@ export const captionService = {
     return [];
   },
 
-  exportCaptions: async (captions: Caption[], format: string): Promise<string> => {
+  exportCaptions: async (_captions: Caption[], format: string): Promise<string> => {
     console.log('Caption Service: Exporting to', format);
     return '';
   }

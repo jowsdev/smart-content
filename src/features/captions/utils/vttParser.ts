@@ -1,5 +1,5 @@
 export const vttParser = {
-  parse: (content: string) => {
+  parse: (_content: string) => {
     console.log('VTT Parser: Parsing content');
     return [];
   }

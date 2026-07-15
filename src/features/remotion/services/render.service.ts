@@ -1,7 +1,7 @@
 import { RenderSettings } from '../types/render.types';
 
 export const renderService = {
-  startRender: async (compositionId: string, settings: RenderSettings) => {
+  startRender: async (compositionId: string, _settings: RenderSettings) => {
     console.log('Service: Starting render for', compositionId);
     return `render_${Date.now()}`;
   },

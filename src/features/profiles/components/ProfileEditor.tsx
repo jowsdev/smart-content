@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Profile, ProfileVariable } from '../types/profile.types';
+import type { Profile } from '../types/profile.types';
 import { ProfileSidebar } from './ProfileSidebar';
 import { Card } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';

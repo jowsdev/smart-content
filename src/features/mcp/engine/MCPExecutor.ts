@@ -1,5 +1,4 @@
 import type { MCPExecutionRequest, MCPExecutionResponse } from '../types/execution.types';
-import { mcpRegistry } from './MCPRegistry';
 
 export class MCPExecutor {
   async executeTool(request: MCPExecutionRequest): Promise<MCPExecutionResponse> {

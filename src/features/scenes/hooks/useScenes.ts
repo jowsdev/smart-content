@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Scene } from '../types/scene.types';
 
 export const useScenes = () => {
-  const [scenes, setScenes] = useState<Scene[]>([]);
+  const [scenes] = useState<Scene[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

@@ -1,5 +1,3 @@
-import type { MCPServer } from '../types/server.types';
-import { mcpRegistry } from './MCPRegistry';
 
 export class MCPDiscovery {
   async discoverTools(serverId: string) {
